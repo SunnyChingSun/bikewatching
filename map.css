@@ -1,0 +1,133 @@
+html,
+body {
+  margin: 0;
+  padding: 5;
+  height: 100%;
+  width: 100%;
+  display: flex;
+  justify-content: center; /* Center horizontally */
+  align-items: center; /* Center vertically */
+}
+
+#map {
+  width: 100%; /* Adjust width to your desired size */
+  height: 90%; /* Adjust height to your desired size */
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1); /* Optional: subtle shadow for effect */
+  border-radius: 8px; /* Optional: rounded corners */
+  position: relative; /* Needed for absolute positioning of SVG */
+}
+
+#map svg {
+  position: absolute;
+  z-index: 1;
+  width: 100%;
+  height: 100%;
+  pointer-events: none; /* Allow map interactions to work through SVG */
+}
+
+/* Shared color variables for circles and legend */
+#map svg circle,
+.legend > div {
+  --color-departures: steelblue;
+  --color-arrivals: darkorange;
+  --color: color-mix(
+    in oklch,
+    var(--color-departures) calc(100% * var(--departure-ratio)),
+    var(--color-arrivals)
+  );
+}
+
+#map svg circle {
+  pointer-events: auto; /* Enable tooltips on circles */
+  fill: var(--color);
+}
+
+header {
+  display: flex;
+  justify-content: space-between;
+  align-items: baseline;
+  gap: 1em;
+  padding: 1em;
+  width: 100%;
+  box-sizing: border-box;
+}
+
+header h1 {
+  margin: 0;
+  text-align: left;
+}
+
+header label {
+  display: flex;
+  align-items: flex-start;
+  gap: 0.5em;
+}
+
+header label > span {
+  white-space: nowrap;
+  padding-top: 0.25em;
+}
+
+.slider-container {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-end;
+  gap: 0.25em;
+  min-width: 0;
+  flex: 1;
+}
+
+#time-slider {
+  width: 100%;
+  min-width: 300px;
+  max-width: 600px;
+}
+
+.time-display {
+  display: flex;
+  justify-content: flex-end;
+  width: 100%;
+  min-width: 300px;
+  max-width: 600px;
+}
+
+#selected-time {
+  text-align: right;
+  min-width: 80px;
+}
+
+#any-time {
+  color: #666;
+  font-style: italic;
+  text-align: right;
+}
+
+.legend {
+  display: flex;
+  gap: 1em;
+  align-items: center;
+  margin-block: 1em;
+  padding: 0 1em;
+}
+
+.legend > span {
+  font-weight: 500;
+  margin-right: 0.5em;
+}
+
+.legend > div {
+  display: flex;
+  align-items: center;
+  gap: 0.5em;
+  font-size: 0.9em;
+}
+
+.legend > div::before {
+  content: "";
+  width: 1.5em;
+  height: 1.5em;
+  background-color: var(--color);
+  border-radius: 50%;
+  border: 1px solid rgba(0, 0, 0, 0.1);
+}
+
